@@ -1,8 +1,33 @@
 {
-    "name": "vue-components",
+    "name": "@fangzhongya/vue-components",
     "private": true,
-    "version": "0.0.0",
+    "version": "0.0.1",
     "type": "module",
+    "description ": "unplugin-vue-components插件",
+    "author": "fangzhongya ",
+    "license": "MIT",
+    "keywords": [
+        "unplugin-vue-components插件"
+    ],
+    "main": "./dist/index.umd.js",
+    "module": "./dist/index.es.js",
+    "exports": {
+        ".": {
+            "import": "./dist/index.es.js",
+            "require": "./dist/index.umd.js"
+        }
+    },
+    "files": [
+        "dist"
+    ],
+    "repository": {
+        "type": "git",
+        "url": " https://github.com/fangzhongya/vue-components.git"
+    },
+    "publishConfig": {
+        "access": "public",
+        "registry": "https://registry.npmjs.org/"
+    },
     "scripts": {
         "dev": "vite",
         "build": "tsc && vite build",

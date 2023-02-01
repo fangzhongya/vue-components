@@ -141,7 +141,7 @@ export const config: Config = {
      * @param {*} url
      *
      */
-    getFromName(url, name, type) {
+    getFromName() {
         return 'default';
     },
 };

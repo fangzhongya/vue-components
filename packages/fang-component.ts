@@ -422,7 +422,7 @@ class FangComponent {
      * @param {string} name 名称
      * @returns { String } 文件地址
      */
-    #getCorrespondUrl2(type: ResolveType, urls: Array<string>, ml: string, yname: string, top: string, name?: string): string | undefined | void {
+    #getCorrespondUrl2(type: ResolveType, urls: Array<string>, ml: string, yname: string, top: string): string | undefined | void {
         const v = this.#curDir + ml + '/';
 
         const as: Array<string> = [];
@@ -460,7 +460,7 @@ class FangComponent {
         if (urls.length == 1) {
             return urls[0];
         } else if (urls.length > 1) {
-            return this.#getCorrespondUrl2(type, urls, ml, yname, top, name);
+            return this.#getCorrespondUrl2(type, urls, ml, yname, top);
         }
     }
 
