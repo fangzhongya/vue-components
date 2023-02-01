@@ -10,7 +10,7 @@
 npm i -D <b>fangzhongya/vue-components</b>
 </pre>
 
-单个配置
+### 单个配置
 
 ```js
 import { ComponentsResolver } from '@fangzhongya/vue-components';
@@ -20,7 +20,7 @@ Components({
 });
 ```
 
-多配置
+### 多配置
 
 ```js
 Components({
