@@ -9,12 +9,12 @@
     "keywords": [
         "unplugin-vue-components插件"
     ],
-    "main": "./dist/index.umd.js",
-    "module": "./dist/index.es.js",
+    "main": "./dist/index.cjs.js",
+    "module": "./dist/index.js",
     "exports": {
         ".": {
-            "import": "./dist/index.es.js",
-            "require": "./dist/index.umd.js"
+            "import": "./dist/index.js",
+            "require": "./dist/index.cjs.js"
         }
     },
     "files": [
@@ -39,11 +39,13 @@
     "scripts": {
         "dev": "vite",
         "build": "tsc && vite build",
+        "build:tsup": "tsup",
         "preview": "vite preview",
         "test": "vitest test"
     },
     "devDependencies": {
         "@types/node": "^18.11.18",
+        "tsup": "^6.5.0",
         "typescript": "^4.9.3",
         "unplugin-vue-components": "^0.23.0",
         "vite": "^4.0.0",
