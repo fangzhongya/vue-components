@@ -20,6 +20,14 @@
     "files": [
         "dist"
     ],
+    "types": "index.d.ts",
+    "typesVersions": {
+        "*": {
+            "*": [
+                "./dist/*"
+            ]
+        }
+    },
     "repository": {
         "type": "git",
         "url": " https://github.com/fangzhongya/vue-components.git"
