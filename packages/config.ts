@@ -48,7 +48,10 @@ export interface Config {
      * 不区分首字母大小写
      */
     startss?: Array<string>,
-
+    /**
+     * 过滤 不匹配 全匹配 - 模式匹配的
+     * 不区分首字母大小写
+     */
     filtes?: Array<string>,
 
     /**
@@ -59,7 +62,7 @@ export interface Config {
     /**
      * 获取匹配数组
      */
-    getMatch?(v: string, extensions?: Array<string>, matchs?: Array<string>, matchexts?: Array<string>): Array<string | RegExp>,
+    getMatch?(name: string, extensions?: Array<string>, matchs?: Array<string>, matchexts?: Array<string>): Array<string | RegExp>,
 
 }
 
@@ -73,6 +76,10 @@ export interface FangConfig extends Config {
      */
     isJson?: boolean,
     /**
+     * 生成json 配置文件名称
+     */
+    jsonName?: string,
+    /**
      * 格式化的组件的地址
      */
     urls?: Array<string>,
@@ -80,6 +87,7 @@ export interface FangConfig extends Config {
      * 格式化的指令的地址
      */
     dirUrls?: Array<string>,
+
 }
 
 
@@ -134,6 +142,10 @@ export const config: Config = {
     startss: [
         // 'router'
     ],
+    /**
+     * 过滤 不匹配 全匹配 - 模式匹配的
+     * 不区分首字母大小写
+     */
     filtes: ['router-link', 'router-view'],
 
     /**
@@ -145,3 +157,52 @@ export const config: Config = {
         return 'default';
     },
 };
+
+
+
+/**
+ * 合并两个对象的值
+ * @param a 合并到的对象
+ * @param b 合并对象
+ * @param j 合并级别
+ * @param i 是否合并数组
+ * @returns 合并的对象
+ */
+export function objectMerge<T>(a: T, b: T, j: number = 1, i?: boolean): T {
+    for (const key in b) {
+        const v = a[key];
+        const t = b[key];
+        if (v) {
+            if (v instanceof Array) {
+                if (i) {
+                    if (t instanceof Array) {
+                        v.push(...t)
+                    } else {
+                        v.push(t)
+                    }
+                } else {
+                    a[key] = t;
+                }
+            } else if (typeof v == 'object') {
+                const cv = Object.prototype.toString.call(v);
+                const ct = Object.prototype.toString.call(t)
+                if (cv == ct) {
+                    const n = j - 1;
+                    if (n > 0) {
+                        a[key] = objectMerge(v, t, n, i);
+                    } else {
+                        a[key] = t;
+                    }
+                } else {
+                    a[key] = t;
+                }
+            }
+            else {
+                a[key] = t;
+            }
+        } else {
+            a[key] = t;
+        }
+    }
+    return a
+}

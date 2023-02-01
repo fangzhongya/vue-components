@@ -1,4 +1,4 @@
-import Fang from "./fang-component";
+import Fang from "./component";
 
 export type { Config } from "./config";
 export { ComponentsResolver } from "./resolver";

@@ -219,7 +219,7 @@ class FangComponent {
          */
         this.#curDir = '';
         if (this.config.dir) {
-            this.#curDir = resolve(__dirname, this.config.dir).replace(/\\/g, '/') + '/';
+            this.#curDir = resolve(process.cwd(), this.config.dir).replace(/\\/g, '/') + '/';
         }
 
         /**

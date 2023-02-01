@@ -19,7 +19,14 @@
     "noImplicitReturns": true,
     "skipLibCheck": true
   },
+  "paths": {
+    "*": [
+      "node_modules/*",
+      "types/*"
+    ]
+  },
   "include": [
     "packages/**/*.ts",
+    "types/global.d.ts",
   ]
 }
