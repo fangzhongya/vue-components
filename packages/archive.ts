@@ -1,4 +1,4 @@
-import fs from 'fs';
+import { writeFile } from 'fs';
 import { resolve } from 'path';
 import { config as comConfig, objectMerge } from "./config"
 import type { FangConfig } from "./config";
@@ -44,7 +44,7 @@ function setJson(obj: FangConfig) {
                 process.cwd(),
                 obj.jsonName,
             );
-            fs.writeFile(
+            writeFile(
                 url,
                 JSON.stringify(global._ComponentsResolverArchive_),
                 'utf-8',
