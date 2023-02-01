@@ -61,10 +61,10 @@ function setJson(obj: FangConfig) {
  * @returns
  */
 export function ComponentsResolverArchive(config: FangConfig = {}): ComponentResolver[] {
-    let configs = objectMerge(archiveConfig, config);
-    configs = objectMerge(comConfig, configs);
 
-    const fangComp = new FangComponent(configs);
+    const configs = objectMerge(comConfig, archiveConfig, 2, true);
+
+    const fangComp = new FangComponent(objectMerge(configs, config));
 
     setJson(fangComp.config);
 
