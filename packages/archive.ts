@@ -1,5 +1,5 @@
-import { writeFile } from 'fs';
-import { resolve } from 'path';
+import { writeFile } from 'node:fs';
+import { resolve } from 'node:path';
 import { config as comConfig, objectMerge } from "./config"
 import type { FangConfig } from "./config";
 import FangComponent from "./component"
