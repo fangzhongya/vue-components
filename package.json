@@ -1,7 +1,7 @@
 {
     "name": "@fangzhongya/vue-components",
     "private": false,
-    "version": "0.0.5",
+    "version": "0.0.6",
     "type": "module",
     "description ": "unplugin-vue-components插件",
     "author": "fangzhongya ",

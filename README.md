@@ -7,7 +7,7 @@
 支持多次配置
 
 <pre>
-npm i -D <b>fangzhongya/vue-components</b>
+npm i -D <b>@fangzhongya/vue-components</b>
 </pre>
 
 ### 单个配置
