@@ -49,7 +49,7 @@ Components({
 ```js
 const config = {
     /**
-     * 自动导入的文件目录
+     * 自动导入的文件目录必须以/结尾
      */
     dir: './src/components/',
     /**
