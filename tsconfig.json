@@ -27,6 +27,10 @@
   },
   "include": [
     "packages/**/*.ts",
+    "node.index.tss",
     "types/global.d.ts",
-  ]
+  ],
+  "ts-node": {
+    "esm": true
+  }
 }

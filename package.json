@@ -1,8 +1,8 @@
 {
     "name": "@fangzhongya/vue-components",
     "private": false,
-    "version": "0.0.7",
     "type": "module",
+    "version": "0.0.9",
     "description ": "unplugin-vue-components插件",
     "author": "fangzhongya ",
     "license": "MIT",
@@ -18,10 +18,12 @@
         "registry": "https://registry.npmjs.org/"
     },
     "scripts": {
+        "dev": "ts-node node.index.ts",
         "build": "tsup",
         "test": "vitest test"
     },
     "devDependencies": {
+        "@fangzhongya/create": "^0.0.2",
         "@types/node": "^18.11.18",
         "tsup": "^6.5.0",
         "typescript": "^4.9.5",
@@ -31,8 +33,8 @@
     "dependencies": {
         "fast-glob": "^3.2.12"
     },
-    "main": "./dist/index.cjs.js",
-    "module": "./dist/index.js",
+    "main": "./dist/index.js",
+    "module": "./dist/index.mjs",
     "types": "./dist/index.d.ts",
     "typesVersions": {
         "*": {
@@ -46,12 +48,29 @@
     ],
     "exports": {
         ".": {
-            "require": "./dist/index.cjs.js",
-            "import": "./dist/index.js"
+            "require": "./dist/index.js",
+            "import": "./dist/index.mjs",
+            "types": "./dist/index.d.ts"
         },
         "./archive": {
-            "require": "./dist/archive.cjs.js",
-            "import": "./dist/archive.js"
+            "require": "./dist/archive.js",
+            "import": "./dist/archive.mjs",
+            "types": "./dist/archive.d.ts"
+        },
+        "./config": {
+            "require": "./dist/config.js",
+            "import": "./dist/config.mjs",
+            "types": "./dist/config.d.ts"
+        },
+        "./component": {
+            "require": "./dist/component.js",
+            "import": "./dist/component.mjs",
+            "types": "./dist/component.d.ts"
+        },
+        "./resolver": {
+            "require": "./dist/resolver.js",
+            "import": "./dist/resolver.mjs",
+            "types": "./dist/resolver.d.ts"
         }
     }
 }
