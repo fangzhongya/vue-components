@@ -1,12 +1,12 @@
 import { writeFile } from 'node:fs';
 import { resolve } from 'node:path';
-import { config as comConfig, objectMerge } from "./config"
-import type { FangConfig } from "./config";
-import FangComponent from "./component"
-import type { ComponentResolveResult, ComponentResolver } from 'unplugin-vue-components';
-
-
-
+import { config as comConfig, objectMerge } from './config';
+import type { FangConfig } from './config';
+import FangComponent from './component';
+import type {
+    ComponentResolveResult,
+    ComponentResolver,
+} from 'unplugin-vue-components';
 
 const archiveConfig: FangConfig = {
     /**
@@ -30,7 +30,7 @@ const archiveConfig: FangConfig = {
     /**
      * 生成json 配置文件名称
      */
-    jsonName: "./components.config.json",
+    jsonName: './components.config.json',
 };
 
 function setJson(obj: FangConfig) {
@@ -40,44 +40,53 @@ function setJson(obj: FangConfig) {
         global._ComponentsResolverArchive_[obj.dir] = obj;
 
         if (obj.jsonName) {
-            let url = resolve(
-                process.cwd(),
-                obj.jsonName,
-            );
+            let url = resolve(process.cwd(), obj.jsonName);
             writeFile(
                 url,
-                JSON.stringify(global._ComponentsResolverArchive_),
+                JSON.stringify(
+                    global._ComponentsResolverArchive_,
+                ),
                 'utf-8',
-                () => { },
+                () => {},
             );
         }
     }
 }
 
-
-
 /**
  * 自动按需匹配注册
  * @returns
  */
-export function ComponentsResolverArchive(config: FangConfig = {}): ComponentResolver[] {
+export function ComponentsResolverArchive(
+    config: FangConfig = {},
+): ComponentResolver[] {
+    const configs = objectMerge(
+        comConfig,
+        archiveConfig,
+        2,
+        true,
+    );
 
-    const configs = objectMerge(comConfig, archiveConfig, 2, true);
-
-    const fangComp = new FangComponent(objectMerge(configs, config));
+    const fangComp = new FangComponent(
+        objectMerge(configs, config),
+    );
 
     setJson(fangComp.config);
 
     return [
         {
             type: 'component',
-            resolve: (name: string): ComponentResolveResult => {
+            resolve: (
+                name: string,
+            ): ComponentResolveResult => {
                 return fangComp.resolve(name, 'component');
             },
         },
         {
             type: 'directive',
-            resolve: (name: string): ComponentResolveResult => {
+            resolve: (
+                name: string,
+            ): ComponentResolveResult => {
                 return fangComp.resolve(name, 'directive');
             },
         },

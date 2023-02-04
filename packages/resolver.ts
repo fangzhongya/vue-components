@@ -1,16 +1,18 @@
-
-import { config as comConfig, objectMerge } from "./config"
-import type { Config } from "./config";
-import FangComponent from "./component"
-import type { ComponentResolveResult, ComponentResolver } from 'unplugin-vue-components';
-
-
+import { config as comConfig, objectMerge } from './config';
+import type { Config } from './config';
+import FangComponent from './component';
+import type {
+    ComponentResolveResult,
+    ComponentResolver,
+} from 'unplugin-vue-components';
 
 /**
  * 自动按需匹配注册
  * @returns
  */
-export function ComponentsResolver(config: Config = {}): ComponentResolver[] {
+export function ComponentsResolver(
+    config: Config = {},
+): ComponentResolver[] {
     const configs = objectMerge(comConfig, config);
 
     const fangComp = new FangComponent(configs);
@@ -18,13 +20,17 @@ export function ComponentsResolver(config: Config = {}): ComponentResolver[] {
     return [
         {
             type: 'component',
-            resolve: (name: string): ComponentResolveResult => {
+            resolve: (
+                name: string,
+            ): ComponentResolveResult => {
                 return fangComp.resolve(name, 'component');
             },
         },
         {
             type: 'directive',
-            resolve: (name: string): ComponentResolveResult => {
+            resolve: (
+                name: string,
+            ): ComponentResolveResult => {
                 return fangComp.resolve(name, 'directive');
             },
         },
