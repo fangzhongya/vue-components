@@ -1,8 +1,7 @@
 import fastGlob from 'fast-glob';
 import { resolve } from 'path';
-import type { Config, FangConfig } from "./config"
+import type { Config, FangConfig } from './config';
 import type { ComponentResolveResult } from 'unplugin-vue-components';
-
 
 /**
  *
@@ -70,7 +69,10 @@ function getMatchDir(name: string) {
 /**
  * 判断是否匹配
  */
-function isUrlsMatchi(key: string, arr: Array<string | RegExp>): boolean {
+function isUrlsMatchi(
+    key: string,
+    arr: Array<string | RegExp>,
+): boolean {
     if (arr) {
         for (let index = 0; index < arr.length; index++) {
             const element = arr[index];
@@ -94,7 +96,10 @@ function isUrlsMatchi(key: string, arr: Array<string | RegExp>): boolean {
  * @param {*} name
  * @returns
  */
-function getForUrl(arr: Array<string>, name: string | RegExp): string | undefined | void {
+function getForUrl(
+    arr: Array<string>,
+    name: string | RegExp,
+): string | undefined | void {
     for (let index = 0; index < arr.length; index++) {
         const element = arr[index];
         if (typeof name == 'string') {
@@ -115,7 +120,10 @@ function getForUrl(arr: Array<string>, name: string | RegExp): string | undefine
  * @param {*} name
  * @returns
  */
-function getForUrlStart(arr: Array<string> | undefined, name: string): string | undefined | void {
+function getForUrlStart(
+    arr: Array<string> | undefined,
+    name: string,
+): string | undefined | void {
     if (arr) {
         for (let index = 0; index < arr.length; index++) {
             const element = arr[index];
@@ -157,14 +165,13 @@ function getName(name: string): Array<string> {
     }
 }
 
-
 interface CacheObj {
     component?: {
-        [key: string]: ComponentResolveResult
-    },
+        [key: string]: ComponentResolveResult;
+    };
     directive?: {
-        [key: string]: ComponentResolveResult
-    }
+        [key: string]: ComponentResolveResult;
+    };
 }
 
 type ResolveType = 'component' | 'directive';
@@ -173,13 +180,13 @@ type ResolveType = 'component' | 'directive';
  * 自动注册组件和指令的方法
  */
 class FangComponent {
-    config: FangConfig
-    #comUrls: Array<string> | undefined
-    #dirUrls: Array<string> | undefined
-    #cacheObj: CacheObj | undefined
-    #curDir: string | undefined
-    #aliassArr: Array<string> | undefined
-    #aliassValueArr: Array<string> | undefined
+    config: FangConfig;
+    #comUrls: Array<string> | undefined;
+    #dirUrls: Array<string> | undefined;
+    #cacheObj: CacheObj | undefined;
+    #curDir: string | undefined;
+    #aliassArr: Array<string> | undefined;
+    #aliassValueArr: Array<string> | undefined;
     constructor(config?: Config) {
         this.config = config || {};
 
@@ -218,29 +225,38 @@ class FangComponent {
          * 当前完整的地址
          */
         this.#curDir = '';
+
         if (this.config.dir) {
-            this.#curDir = resolve(process.cwd(), this.config.dir).replace(/\\/g, '/') + '/';
+            this.config.dir = this.config.dir + '/';
+            this.config.dir = this.config.dir.replace(
+                /\/\/$/,
+                '/',
+            );
+            this.#curDir =
+                resolve(
+                    process.cwd(),
+                    this.config.dir,
+                ).replace(/\\/g, '/') + '/';
         }
 
         /**
          * 别名数组
          */
-        this.#aliassArr = []
-        const aliass = this.config.aliass
+        this.#aliassArr = [];
+        const aliass = this.config.aliass;
         if (aliass) {
             this.#aliassArr = Object.keys(aliass);
             /**
              * 别名完整路径的数组
              */
-            this.#aliassValueArr = this.#aliassArr.map((key: string) => {
-                return this.#curDir + aliass[key] + '/';
-            });
+            this.#aliassValueArr = this.#aliassArr.map(
+                (key: string) => {
+                    return this.#curDir + aliass[key] + '/';
+                },
+            );
         }
 
-
         this.#getUrls();
-
-
     }
 
     /**
@@ -248,8 +264,13 @@ class FangComponent {
      */
     #setGetMatch() {
         if (!this.config.getMatch) {
-            this.config.getMatch = function (v, extensions, matchs, matchexts) {
-                const urls = [] as Array<string | RegExp>;
+            this.config.getMatch = function (
+                v,
+                extensions,
+                matchs,
+                matchexts,
+            ) {
+                const urls: Array<string | RegExp> = [];
                 if (matchs) {
                     matchs.forEach((key) => {
                         const s = '/' + v + key;
@@ -258,7 +279,9 @@ class FangComponent {
                                 urls.push(s + '.' + z);
                             });
                         } else {
-                            const reg = new RegExp(s + "\.([a-z|A-Z]+?)$");
+                            const reg = new RegExp(
+                                s + '.([a-z|A-Z]+?)$',
+                            );
                             urls.push(reg);
                         }
                     });
@@ -279,16 +302,18 @@ class FangComponent {
     #getUrls() {
         const url = this.#getFgUrl();
         if (url) {
-            this.#comUrls =
-                fastGlob.sync(url, {
-                    onlyFiles: false,
-                    absolute: true,
-                });
+            this.#comUrls = fastGlob.sync(url, {
+                onlyFiles: false,
+                absolute: true,
+            });
         }
 
         if (this.config.directives) {
             const durl =
-                this.config.dir + '**/' + this.config.directives + '/*.js';
+                this.config.dir +
+                '**/' +
+                this.config.directives +
+                '/*.js';
             this.#dirUrls =
                 fastGlob.sync(durl, {
                     onlyFiles: false,
@@ -316,7 +341,6 @@ class FangComponent {
                  * 格式化的指令的地址
                  */
                 this.config.dirUrls = dirUrls;
-
             }
         }
     }
@@ -335,10 +359,14 @@ class FangComponent {
                     '}'
                 );
             } else if (this.config.extensions.length == 1) {
-                return this.config.dir + '**/*.' + this.config.extensions[0];
+                return (
+                    this.config.dir +
+                    '**/*.' +
+                    this.config.extensions[0]
+                );
             }
         } else {
-            return this.config.dir + '**/*.*'
+            return this.config.dir + '**/*.*';
         }
     }
 
@@ -348,7 +376,10 @@ class FangComponent {
      * @param {String} type 类型
      * @returns { Object } 注册的对象
      */
-    #getCache(name: string, type: ResolveType): ComponentResolveResult {
+    #getCache(
+        name: string,
+        type: ResolveType,
+    ): ComponentResolveResult {
         if (this.#cacheObj) {
             const obj = this.#cacheObj[type] || {};
             return obj[name];
@@ -361,8 +392,12 @@ class FangComponent {
      * @param {String} type 类型
      * @param { Object } 注册的对象
      */
-    #setCache(name: string, type: ResolveType, obj: ComponentResolveResult): ComponentResolveResult {
-        const cach = this.#cacheObj || {}
+    #setCache(
+        name: string,
+        type: ResolveType,
+        obj: ComponentResolveResult,
+    ): ComponentResolveResult {
+        const cach = this.#cacheObj || {};
         const co = cach[type] || {};
         co[name] = obj;
         cach[type] = co;
@@ -376,15 +411,24 @@ class FangComponent {
     #namefilter(name: string): boolean {
         name = getNmaeBar(name);
         if (this.config.startss) {
-            for (let index = 0; index < this.config.startss.length; index++) {
-                const element = this.config.startss[index] + '-';
+            for (
+                let index = 0;
+                index < this.config.startss.length;
+                index++
+            ) {
+                const element =
+                    this.config.startss[index] + '-';
                 if (name.startsWith(element)) {
                     return false;
                 }
             }
         }
         if (this.config.filtes) {
-            for (let index = 0; index < this.config.filtes.length; index++) {
+            for (
+                let index = 0;
+                index < this.config.filtes.length;
+                index++
+            ) {
                 const element = this.config.filtes[index];
                 if (name === element) {
                     return false;
@@ -401,10 +445,18 @@ class FangComponent {
      * @param {String} type 类型
      * @returns  { Object } 注册的对象
      */
-    #getNameFromUrl(from: string, name: string, type: ResolveType): ComponentResolveResult {
+    #getNameFromUrl(
+        from: string,
+        name: string,
+        type: ResolveType,
+    ): ComponentResolveResult {
         let dname = '';
         if (this.config.getFromName) {
-            dname = this.config.getFromName(from, name, type);
+            dname = this.config.getFromName(
+                from,
+                name,
+                type,
+            );
         }
         return {
             name: dname || 'default',
@@ -422,7 +474,13 @@ class FangComponent {
      * @param {string} name 名称
      * @returns { String } 文件地址
      */
-    #getCorrespondUrl2(type: ResolveType, urls: Array<string>, ml: string, yname: string, top: string): string | undefined | void {
+    #getCorrespondUrl2(
+        type: ResolveType,
+        urls: Array<string>,
+        ml: string,
+        yname: string,
+        top: string,
+    ): string | undefined | void {
         const v = this.#curDir + ml + '/';
 
         const as: Array<string> = [];
@@ -454,13 +512,25 @@ class FangComponent {
      * @param {String } top 匹配的值
      * @returns {String } 文件地址
      */
-    #getConfigUrl(type: ResolveType, name: string, ml: string, yname: string, top: string): string | undefined | void {
+    #getConfigUrl(
+        type: ResolveType,
+        name: string,
+        ml: string,
+        yname: string,
+        top: string,
+    ): string | undefined | void {
         const ms = this.#setMatchUrls(name, type);
         const urls = this.#getUrlsMatchi(ms, type);
         if (urls.length == 1) {
             return urls[0];
         } else if (urls.length > 1) {
-            return this.#getCorrespondUrl2(type, urls, ml, yname, top);
+            return this.#getCorrespondUrl2(
+                type,
+                urls,
+                ml,
+                yname,
+                top,
+            );
         }
     }
 
@@ -470,7 +540,10 @@ class FangComponent {
      * @param {String} type 类型
      * @returns  { Object } 注册的对象
      */
-    #setNameFrom(name: string, type: ResolveType): ComponentResolveResult {
+    #setNameFrom(
+        name: string,
+        type: ResolveType,
+    ): ComponentResolveResult {
         let mb = getNmaeBar(name);
         //匹配别名返回值
         const alias = this.config.alias;
@@ -479,7 +552,9 @@ class FangComponent {
                 const reg = new RegExp('^' + alias + '-');
                 mb = mb.replace(reg, '');
                 const reg1 = new RegExp('^' + alias);
-                const reg2 = new RegExp('^' + firstUpper(alias));
+                const reg2 = new RegExp(
+                    '^' + firstUpper(alias),
+                );
                 if (reg1.test(name)) {
                     name = name.replace(reg1, '');
                 } else if (reg2.test(name)) {
@@ -495,20 +570,30 @@ class FangComponent {
         }
 
         if (this.#aliassArr) {
-            for (let index = 0; index < this.#aliassArr.length; index++) {
+            for (
+                let index = 0;
+                index < this.#aliassArr.length;
+                index++
+            ) {
                 const element = this.#aliassArr[index];
                 const aliass = this.config.aliass || {};
                 if (mb.startsWith(element + '-')) {
-                    const sl = mb.substring(element.length + 1);
+                    const sl = mb.substring(
+                        element.length + 1,
+                    );
                     const from = this.#getConfigUrl(
                         type,
                         sl,
                         aliass[element],
                         name,
-                        element
+                        element,
                     );
                     if (from) {
-                        return this.#getNameFromUrl(from, name, type);
+                        return this.#getNameFromUrl(
+                            from,
+                            name,
+                            type,
+                        );
                     }
                 }
             }
@@ -525,7 +610,10 @@ class FangComponent {
      * @param {String} type 类型
      * @returns {Array} 需要匹配的地址名称数组
      */
-    #setMatchUrls(name: string, type: ResolveType): Array<string | RegExp> {
+    #setMatchUrls(
+        name: string,
+        type: ResolveType,
+    ): Array<string | RegExp> {
         const arr = getName(name);
         const urls: Array<string | RegExp> = [];
         if (type == 'directive') {
@@ -541,7 +629,7 @@ class FangComponent {
                         v,
                         this.config.extensions,
                         this.config.matchs,
-                        this.config.matchexts
+                        this.config.matchexts,
                     );
                     if (vs) {
                         urls.push(...vs);
@@ -558,7 +646,10 @@ class FangComponent {
      * @param {String} type 类型
      * @returns {Array} 需要匹配的地址名称数组
      */
-    #setMatchUrl(name: string, type: ResolveType): Array<string | RegExp> {
+    #setMatchUrl(
+        name: string,
+        type: ResolveType,
+    ): Array<string | RegExp> {
         let urls: Array<string | RegExp> = [];
         if (type == 'directive') {
             urls = getMatchDir(name);
@@ -569,7 +660,7 @@ class FangComponent {
                     name,
                     this.config.extensions,
                     this.config.matchs,
-                    this.config.matchexts
+                    this.config.matchexts,
                 );
             }
         }
@@ -582,7 +673,10 @@ class FangComponent {
      * @param {String} type 类型
      * @returns  {Array} 匹配到的地址数组
      */
-    #getUrlsMatchi(arr: Array<string | RegExp>, type: ResolveType): Array<string> {
+    #getUrlsMatchi(
+        arr: Array<string | RegExp>,
+        type: ResolveType,
+    ): Array<string> {
         const as: Array<string> = [];
         if (type == 'directive') {
             this.#dirUrls?.forEach((key) => {
@@ -626,7 +720,12 @@ class FangComponent {
      * @param {string} ml 匹配的目录
      * @returns { String } 文件地址
      */
-    #getCorrespondUrl(urls: Array<string>, name: string, type: ResolveType, bm?: string): string | undefined | void {
+    #getCorrespondUrl(
+        urls: Array<string>,
+        name: string,
+        type: ResolveType,
+        bm?: string,
+    ): string | undefined | void {
         if (!bm) {
             urls = this.#excludeBm(urls);
         }
@@ -649,7 +748,10 @@ class FangComponent {
      * @param {String} type 类型
      * @returns { String } 文件地址
      */
-    #getMatchUrl(name: string, type: ResolveType): string | undefined | void {
+    #getMatchUrl(
+        name: string,
+        type: ResolveType,
+    ): string | undefined | void {
         const ml = this.#setMatchUrls(name, type);
         const urls = this.#getUrlsMatchi(ml, type);
         if (urls.length == 1) {
@@ -665,8 +767,14 @@ class FangComponent {
      * @param {String} type 类型
      * @returns  { Object } 注册的对象
      */
-    resolve(name: string, type: ResolveType): ComponentResolveResult {
-        if (this.config.isCache && this.#getCache(name, type)) {
+    resolve(
+        name: string,
+        type: ResolveType,
+    ): ComponentResolveResult {
+        if (
+            this.config.isCache &&
+            this.#getCache(name, type)
+        ) {
             return this.#getCache(name, type);
         } else if (this.#namefilter(name)) {
             let obj = this.#setNameFrom(name, type);
