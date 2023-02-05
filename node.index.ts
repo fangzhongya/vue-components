@@ -1,5 +1,5 @@
 import { runDev } from '@fangzhongya/create/package';
 
 runDev({
-    check: true,
+    matchexts: [/(?<![\\|\/](util|config)\.ts)$/],
 });

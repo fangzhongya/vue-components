@@ -5,10 +5,9 @@ test('FangComponent', () => {
     const from = new FangComponent({
         dir: './packages/',
         matchs: [''],
+        log: true,
     });
-    console.log(from.config);
     const obj = from.resolve('index', 'component');
-    console.log(obj);
     expect(from.config.dir).toBe('./packages/');
 
     expect(

@@ -1,4 +1,5 @@
-import { config as comConfig, objectMerge } from './config';
+import { config as comConfig } from './config';
+import { unmergeObject } from './util';
 import type { Config } from './config';
 import FangComponent from './component';
 import type {
@@ -13,7 +14,7 @@ import type {
 export function ComponentsResolver(
     config: Config = {},
 ): ComponentResolver[] {
-    const configs = objectMerge(comConfig, config);
+    const configs = unmergeObject(comConfig, config, 1);
 
     const fangComp = new FangComponent(configs);
 

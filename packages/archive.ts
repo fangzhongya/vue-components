@@ -1,8 +1,9 @@
 import { writeFile } from 'node:fs';
 import { resolve } from 'node:path';
-import { config as comConfig, objectMerge } from './config';
+import { config as comConfig } from './config';
 import type { FangConfig } from './config';
 import FangComponent from './component';
+import { unmergeObject } from './util';
 import type {
     ComponentResolveResult,
     ComponentResolver,
@@ -27,6 +28,11 @@ const archiveConfig: FangConfig = {
      * 是否生成json 配置文件
      */
     isJson: true,
+
+    /**
+     * 控制台是否输出日志
+     */
+    log: true,
     /**
      * 生成json 配置文件名称
      */
@@ -60,7 +66,7 @@ function setJson(obj: FangConfig) {
 export function ComponentsResolverArchive(
     config: FangConfig = {},
 ): ComponentResolver[] {
-    const configs = objectMerge(
+    const configs = unmergeObject(
         comConfig,
         archiveConfig,
         2,
@@ -68,7 +74,7 @@ export function ComponentsResolverArchive(
     );
 
     const fangComp = new FangComponent(
-        objectMerge(configs, config),
+        unmergeObject(configs, config, 1),
     );
 
     setJson(fangComp.config);

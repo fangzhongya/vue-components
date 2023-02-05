@@ -1,8 +1,15 @@
 import fastGlob from 'fast-glob';
 import { resolve } from 'path';
 import type { Config, FangConfig } from './config';
-import type { ComponentResolveResult } from 'unplugin-vue-components';
+import type { ComponentInfo } from 'unplugin-vue-components';
+import { styleLog } from './util';
 
+type FangComponentInfo = ComponentInfo | undefined | void;
+
+type FangFromUrl = string | undefined | void;
+
+type FangMatch = string | RegExp;
+type FangMatchs = Array<FangMatch>;
 /**
  *
  * | com-page | ComPage  | comPage  | compage  | 注册名称
@@ -71,7 +78,7 @@ function getMatchDir(name: string) {
  */
 function isUrlsMatchi(
     key: string,
-    arr: Array<string | RegExp>,
+    arr: FangMatchs,
 ): boolean {
     if (arr) {
         for (let index = 0; index < arr.length; index++) {
@@ -98,8 +105,8 @@ function isUrlsMatchi(
  */
 function getForUrl(
     arr: Array<string>,
-    name: string | RegExp,
-): string | undefined | void {
+    name: FangMatch,
+): FangFromUrl {
     for (let index = 0; index < arr.length; index++) {
         const element = arr[index];
         if (typeof name == 'string') {
@@ -123,7 +130,7 @@ function getForUrl(
 function getForUrlStart(
     arr: Array<string> | undefined,
     name: string,
-): string | undefined | void {
+): FangFromUrl {
     if (arr) {
         for (let index = 0; index < arr.length; index++) {
             const element = arr[index];
@@ -167,10 +174,10 @@ function getName(name: string): Array<string> {
 
 interface CacheObj {
     component?: {
-        [key: string]: ComponentResolveResult;
+        [key: string]: FangComponentInfo;
     };
     directive?: {
-        [key: string]: ComponentResolveResult;
+        [key: string]: FangComponentInfo;
     };
 }
 
@@ -270,7 +277,7 @@ class FangComponent {
                 matchs,
                 matchexts,
             ) {
-                const urls: Array<string | RegExp> = [];
+                const urls: FangMatchs = [];
                 if (matchs) {
                     matchs.forEach((key) => {
                         const s = '/' + v + key;
@@ -349,7 +356,7 @@ class FangComponent {
      * 获取components 的匹配路径
      * @returns { String } 匹配路径
      */
-    #getFgUrl(): string | undefined | void {
+    #getFgUrl(): FangFromUrl {
         if (this.config.extensions) {
             if (this.config.extensions.length > 1) {
                 return (
@@ -379,7 +386,7 @@ class FangComponent {
     #getCache(
         name: string,
         type: ResolveType,
-    ): ComponentResolveResult {
+    ): FangComponentInfo {
         if (this.#cacheObj) {
             const obj = this.#cacheObj[type] || {};
             return obj[name];
@@ -395,8 +402,8 @@ class FangComponent {
     #setCache(
         name: string,
         type: ResolveType,
-        obj: ComponentResolveResult,
-    ): ComponentResolveResult {
+        obj: FangComponentInfo,
+    ): FangComponentInfo {
         const cach = this.#cacheObj || {};
         const co = cach[type] || {};
         co[name] = obj;
@@ -449,7 +456,7 @@ class FangComponent {
         from: string,
         name: string,
         type: ResolveType,
-    ): ComponentResolveResult {
+    ): FangComponentInfo {
         let dname = '';
         if (this.config.getFromName) {
             dname = this.config.getFromName(
@@ -480,7 +487,7 @@ class FangComponent {
         ml: string,
         yname: string,
         top: string,
-    ): string | undefined | void {
+    ): FangFromUrl {
         const v = this.#curDir + ml + '/';
 
         const as: Array<string> = [];
@@ -518,7 +525,7 @@ class FangComponent {
         ml: string,
         yname: string,
         top: string,
-    ): string | undefined | void {
+    ): FangFromUrl {
         const ms = this.#setMatchUrls(name, type);
         const urls = this.#getUrlsMatchi(ms, type);
         if (urls.length == 1) {
@@ -543,7 +550,7 @@ class FangComponent {
     #setNameFrom(
         name: string,
         type: ResolveType,
-    ): ComponentResolveResult {
+    ): FangComponentInfo {
         let mb = getNmaeBar(name);
         //匹配别名返回值
         const alias = this.config.alias;
@@ -613,9 +620,9 @@ class FangComponent {
     #setMatchUrls(
         name: string,
         type: ResolveType,
-    ): Array<string | RegExp> {
+    ): FangMatchs {
         const arr = getName(name);
-        const urls: Array<string | RegExp> = [];
+        const urls: FangMatchs = [];
         if (type == 'directive') {
             arr.forEach((v) => {
                 const vs = getMatchDir(v);
@@ -649,8 +656,8 @@ class FangComponent {
     #setMatchUrl(
         name: string,
         type: ResolveType,
-    ): Array<string | RegExp> {
-        let urls: Array<string | RegExp> = [];
+    ): FangMatchs {
+        let urls: FangMatchs = [];
         if (type == 'directive') {
             urls = getMatchDir(name);
         } else {
@@ -674,7 +681,7 @@ class FangComponent {
      * @returns  {Array} 匹配到的地址数组
      */
     #getUrlsMatchi(
-        arr: Array<string | RegExp>,
+        arr: FangMatchs,
         type: ResolveType,
     ): Array<string> {
         const as: Array<string> = [];
@@ -725,7 +732,7 @@ class FangComponent {
         name: string,
         type: ResolveType,
         bm?: string,
-    ): string | undefined | void {
+    ): FangFromUrl {
         if (!bm) {
             urls = this.#excludeBm(urls);
         }
@@ -751,7 +758,7 @@ class FangComponent {
     #getMatchUrl(
         name: string,
         type: ResolveType,
-    ): string | undefined | void {
+    ): FangFromUrl {
         const ml = this.#setMatchUrls(name, type);
         const urls = this.#getUrlsMatchi(ml, type);
         if (urls.length == 1) {
@@ -762,6 +769,56 @@ class FangComponent {
     }
 
     /**
+     * 输出日志
+     * @param name
+     * @param type
+     * @param obj
+     * @param is
+     */
+    #setLog(
+        name: string,
+        type: ResolveType,
+        obj: FangComponentInfo,
+        is?: boolean,
+    ) {
+        if (this.config.log) {
+            const arr = [];
+            if (obj) {
+                let sfrom = obj?.from;
+                arr.push(
+                    styleLog(type, {
+                        bag: 3,
+                    }),
+                );
+                arr.push(
+                    styleLog(name, {
+                        bold: true,
+                    }),
+                );
+                if (!is) {
+                    sfrom = '+' + sfrom;
+                }
+                arr.push(
+                    styleLog(sfrom, {
+                        revert: true,
+                    }),
+                );
+            } else {
+                arr.push(
+                    styleLog(type, {
+                        bag: 7,
+                    }),
+                );
+                arr.push(
+                    styleLog(name, {
+                        bold: true,
+                    }),
+                );
+            }
+            console.log(arr.join(' '));
+        }
+    }
+    /**
      * 自动按需匹配注册
      * @param {String} name 名称
      * @param {String} type 类型
@@ -770,15 +827,15 @@ class FangComponent {
     resolve(
         name: string,
         type: ResolveType,
-    ): ComponentResolveResult {
-        if (
-            this.config.isCache &&
-            this.#getCache(name, type)
-        ) {
-            return this.#getCache(name, type);
+    ): FangComponentInfo {
+        const cache = this.#getCache(name, type);
+        if (this.config.isCache && cache) {
+            this.#setLog(name, type, cache, true);
+            return cache;
         } else if (this.#namefilter(name)) {
             let obj = this.#setNameFrom(name, type);
             if (obj) {
+                this.#setLog(name, type, obj);
                 this.#setCache(name, type, obj);
                 return obj;
             }
