@@ -2,7 +2,12 @@ import fastGlob from 'fast-glob';
 import { resolve } from 'path';
 import type { Config, FangConfig } from './config';
 import type { ComponentInfo } from 'unplugin-vue-components';
-import { styleLog } from './util';
+import {
+    styleLog,
+    getComponentNames,
+    humpToLine,
+    firstUpper,
+} from './util';
 
 type FangComponentInfo = ComponentInfo | undefined | void;
 
@@ -22,46 +27,12 @@ type FangMatchs = Array<FangMatch>;
  */
 
 /**
- * 首字母大写
- * @param {*} vs
- * @returns
- */
-function firstUpper(vs: string): string {
-    return vs.slice(0, 1).toUpperCase() + vs.slice(1);
-}
-/**
- * 首字母小写
- * @param {*} vs
- * @returns
- */
-function firstLower(vs: string): string {
-    return vs.slice(0, 1).toLowerCase() + vs.slice(1);
-}
-
-/**
  * 获取-方式组件名称 el-input
  * @param {*} name
  * @returns
  */
 function getNmaeBar(name: string): string {
-    let reg = /(([A-Z])([^A-Z]*))/g;
-    let result;
-    let arr = [] as Array<string>;
-    let i = 0;
-    while ((result = reg.exec(name)) !== null) {
-        if (i == 0 && result.index != 0) {
-            arr.push(name.substring(0, result.index));
-        }
-        i++;
-        arr.push(result[1].toLowerCase());
-    }
-    if (arr.length == 0) {
-        return name;
-    } else {
-        let a = arr.join('-');
-        a = a.replace(/[-]{2,}/g, '-');
-        return a;
-    }
+    return humpToLine(name);
 }
 
 /**
@@ -147,29 +118,7 @@ function getForUrlStart(
  * @returns
  */
 function getName(name: string): Array<string> {
-    if (name.includes('-')) {
-        let arr = name.split('-');
-        arr = arr.map((vs) => {
-            return firstUpper(vs);
-        });
-        let upper = arr.join('');
-        let lower = firstLower(upper);
-        return [name, upper, lower];
-    } else if (/[A-Z]/.test(name)) {
-        let hg = getNmaeBar(name);
-        if (/[A-Z]/.test(name.slice(0, 1))) {
-            if (hg.includes('-')) {
-                let lower = firstLower(name);
-                return [hg, name, lower];
-            } else {
-                return [name, hg];
-            }
-        } else {
-            return [hg, name];
-        }
-    } else {
-        return [name];
-    }
+    return getComponentNames(name);
 }
 
 interface CacheObj {
@@ -782,12 +731,24 @@ class FangComponent {
         is?: boolean,
     ) {
         if (this.config.log) {
+            const texts = {
+                component: 2,
+                directive: 5,
+            };
             const arr = [];
+            arr.push(
+                styleLog('[@fangzhongya/vue-components]', {
+                    text: 3,
+                }),
+            );
             if (obj) {
-                let sfrom = obj?.from;
+                let sfrom = styleLog(obj?.from, {
+                    text: 4,
+                    revert: true,
+                });
                 arr.push(
                     styleLog(type, {
-                        bag: 3,
+                        text: texts[type],
                     }),
                 );
                 arr.push(
@@ -795,18 +756,19 @@ class FangComponent {
                         bold: true,
                     }),
                 );
+
                 if (!is) {
-                    sfrom = '+' + sfrom;
+                    sfrom =
+                        styleLog('+', {
+                            text: 2,
+                        }) + sfrom;
                 }
-                arr.push(
-                    styleLog(sfrom, {
-                        revert: true,
-                    }),
-                );
+                arr.push(sfrom);
             } else {
                 arr.push(
                     styleLog(type, {
-                        bag: 7,
+                        text: texts[type],
+                        lineThrough: true,
                     }),
                 );
                 arr.push(

@@ -1,8 +1,8 @@
 lockfileVersion: 5.4
 
 specifiers:
-  '@fangzhongya/create': ^0.1.8
-  '@fangzhongya/utils': ^0.0.6
+  '@fangzhongya/create': ^0.1.9
+  '@fangzhongya/utils': 0.0.6-1
   '@types/node': ^18.11.19
   fast-glob: ^3.2.12
   tsup: ^6.5.0
@@ -14,8 +14,8 @@ dependencies:
   fast-glob: 3.2.12
 
 devDependencies:
-  '@fangzhongya/create': 0.1.8
-  '@fangzhongya/utils': 0.0.6
+  '@fangzhongya/create': 0.1.9
+  '@fangzhongya/utils': 0.0.6-1
   '@types/node': 18.11.19
   tsup: 6.5.0_typescript@4.9.5
   typescript: 4.9.5
@@ -451,12 +451,12 @@ packages:
     dev: true
     optional: true
 
-  /@fangzhongya/create/0.1.8:
-    resolution: {integrity: sha512-FnDbdryPQNncEOkBfaMb9yh+BBD33MELFfGZfCzUv7XjlFy3569BIPILu+z1UULZiM+rS1OoXiG3SEMZwbmN/g==}
+  /@fangzhongya/create/0.1.9:
+    resolution: {integrity: sha512-ktX84bY2iHq4jdyBseqbFVO+Cr9vJiYpWgdzbQ/ERZbPjWqHvN1ozMOJzy1IaIhM1YeKrc9EIunJrREt+JFskA==}
     dev: true
 
-  /@fangzhongya/utils/0.0.6:
-    resolution: {integrity: sha512-CBMG28FHEaEt2yQt9Pv3cVvzBVKVnm4UGVbJwputF4yu443C7RVn3GN0yNVKTDXKus/cdIAH6iNDScQYq7i3Og==}
+  /@fangzhongya/utils/0.0.6-1:
+    resolution: {integrity: sha512-EGUllnmzasdF3C37drMq2UeGG8WQJQsok6Pn5Et9x4+4p4h6zQ1gOIB0fXzVIfdwBJs92GgyW/bbXOvsMbExfQ==}
     dev: true
 
   /@jridgewell/gen-mapping/0.1.1:
@@ -1605,8 +1605,8 @@ packages:
       yallist: 4.0.0
     dev: true
 
-  /minipass/4.0.1:
-    resolution: {integrity: sha512-V9esFpNbK0arbN3fm2sxDKqMYgIp7XtVdE4Esj+PE4Qaaxdg1wIw48ITQIOn1sc8xXSmUviVL3cyjMqPlrVkiA==}
+  /minipass/4.0.2:
+    resolution: {integrity: sha512-4Hbzei7ZyBp+1aw0874YWpKOubZd/jc53/XU+gkYry1QV+VvrbO8icLM5CUtm4F0hyXn85DXYKEMIS26gitD3A==}
     engines: {node: '>=8'}
     dev: true
 
@@ -2032,7 +2032,7 @@ packages:
     dependencies:
       chownr: 2.0.0
       fs-minipass: 2.1.0
-      minipass: 4.0.1
+      minipass: 4.0.2
       minizlib: 2.1.2
       mkdirp: 1.0.4
       yallist: 4.0.0
