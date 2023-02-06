@@ -1,8 +1,8 @@
 lockfileVersion: 5.4
 
 specifiers:
-  '@fangzhongya/create': 0.2.0-3
-  '@fangzhongya/utils': 0.0.6-8
+  '@fangzhongya/create': 0.2.0-6
+  '@fangzhongya/utils': 0.0.6-11
   '@types/node': ^18.11.19
   fast-glob: ^3.2.12
   tsup: ^6.5.0
@@ -14,8 +14,8 @@ dependencies:
   fast-glob: 3.2.12
 
 devDependencies:
-  '@fangzhongya/create': 0.2.0-3
-  '@fangzhongya/utils': 0.0.6-8
+  '@fangzhongya/create': 0.2.0-6
+  '@fangzhongya/utils': 0.0.6-11
   '@types/node': 18.11.19
   tsup: 6.5.0_typescript@4.9.5
   typescript: 4.9.5
@@ -451,12 +451,12 @@ packages:
     dev: true
     optional: true
 
-  /@fangzhongya/create/0.2.0-3:
-    resolution: {integrity: sha512-XdgUfR9oa/zRP5+P5JG2zq/F2qOkAwDdPI3MkAMkz1P/5NJJ0uUfu8NGY7vmqZEdxSXdRbp3MJiQrS51ZMAu6g==}
+  /@fangzhongya/create/0.2.0-6:
+    resolution: {integrity: sha512-i/SRYJFcoRW0S3IEZ2Cpkw/yslOA0tsIGiI93/Z6Tpq4ukKeGTb3V43ZjGdHLyXUEjTo/nnhlHwUtebIJ5WJkg==}
     dev: true
 
-  /@fangzhongya/utils/0.0.6-8:
-    resolution: {integrity: sha512-iQ+NceCKpU+4G8tQkBMOGcKFvN+Aaw4sMrIlEwvXN7pftHcaT4Ej40uGlDqne+4o47ZkH3JmpJNa4wKffsSDfw==}
+  /@fangzhongya/utils/0.0.6-11:
+    resolution: {integrity: sha512-f40I3n0bG44s8T+Ln7Veqq8sHQ9OncCd7JIsXSVEU/WW631048FU4r7VaB15FxHmSqm7wdA8NWxmH1GDZ30puA==}
     dev: true
 
   /@jridgewell/gen-mapping/0.1.1:
