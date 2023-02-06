@@ -1,8 +1,8 @@
 lockfileVersion: 5.4
 
 specifiers:
-  '@fangzhongya/create': ^0.1.9
-  '@fangzhongya/utils': 0.0.6-1
+  '@fangzhongya/create': 0.2.0-3
+  '@fangzhongya/utils': 0.0.6-8
   '@types/node': ^18.11.19
   fast-glob: ^3.2.12
   tsup: ^6.5.0
@@ -14,8 +14,8 @@ dependencies:
   fast-glob: 3.2.12
 
 devDependencies:
-  '@fangzhongya/create': 0.1.9
-  '@fangzhongya/utils': 0.0.6-1
+  '@fangzhongya/create': 0.2.0-3
+  '@fangzhongya/utils': 0.0.6-8
   '@types/node': 18.11.19
   tsup: 6.5.0_typescript@4.9.5
   typescript: 4.9.5
@@ -451,12 +451,12 @@ packages:
     dev: true
     optional: true
 
-  /@fangzhongya/create/0.1.9:
-    resolution: {integrity: sha512-ktX84bY2iHq4jdyBseqbFVO+Cr9vJiYpWgdzbQ/ERZbPjWqHvN1ozMOJzy1IaIhM1YeKrc9EIunJrREt+JFskA==}
+  /@fangzhongya/create/0.2.0-3:
+    resolution: {integrity: sha512-XdgUfR9oa/zRP5+P5JG2zq/F2qOkAwDdPI3MkAMkz1P/5NJJ0uUfu8NGY7vmqZEdxSXdRbp3MJiQrS51ZMAu6g==}
     dev: true
 
-  /@fangzhongya/utils/0.0.6-1:
-    resolution: {integrity: sha512-EGUllnmzasdF3C37drMq2UeGG8WQJQsok6Pn5Et9x4+4p4h6zQ1gOIB0fXzVIfdwBJs92GgyW/bbXOvsMbExfQ==}
+  /@fangzhongya/utils/0.0.6-8:
+    resolution: {integrity: sha512-iQ+NceCKpU+4G8tQkBMOGcKFvN+Aaw4sMrIlEwvXN7pftHcaT4Ej40uGlDqne+4o47ZkH3JmpJNa4wKffsSDfw==}
     dev: true
 
   /@jridgewell/gen-mapping/0.1.1:
@@ -731,7 +731,7 @@ packages:
     dependencies:
       caniuse-lite: 1.0.30001450
       electron-to-chromium: 1.4.286
-      node-releases: 2.0.9
+      node-releases: 2.0.10
       update-browserslist-db: 1.0.10_browserslist@4.21.5
     dev: true
 
@@ -1660,8 +1660,8 @@ packages:
     resolution: {integrity: sha512-VzW+TAk2wE4X9maiKMlT+GsPU4OMmR1U9CrHSmd3DFLn2IcZ9VJ6M6BBugGfYUnPCLSYxXdZy17M0BEJyhUTwg==}
     dev: true
 
-  /node-releases/2.0.9:
-    resolution: {integrity: sha512-2xfmOrRkGogbTK9R6Leda0DGiXeY3p2NJpy4+gNCffdUvV6mdEJnaDEic1i3Ec2djAo8jWYoJMR5PB0MSMpxUA==}
+  /node-releases/2.0.10:
+    resolution: {integrity: sha512-5GFldHPXVG/YZmFzJvKK2zDSzPKhEp0+ZR5SVaoSag9fsL5YgHbUHDfnG5494ISANDcK4KwPXAx2xqVEydmd7w==}
     dev: true
 
   /normalize-path/3.0.0:

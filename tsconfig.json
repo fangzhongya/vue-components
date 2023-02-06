@@ -27,7 +27,8 @@
   },
   "include": [
     "packages/**/*.ts",
-    "node.index.tss",
+    "node.index.ts",
+    "node.tests.ts",
     "types/global.d.ts",
   ],
   "ts-node": {

@@ -27,15 +27,6 @@ type FangMatchs = Array<FangMatch>;
  */
 
 /**
- * 获取-方式组件名称 el-input
- * @param {*} name
- * @returns
- */
-function getNmaeBar(name: string): string {
-    return humpToLine(name);
-}
-
-/**
  * 获取directive 指令匹配数组
  * @param {*} name
  * @returns
@@ -110,15 +101,6 @@ function getForUrlStart(
             }
         }
     }
-}
-
-/**
- * 获取三种方式名称 el-input ElInput elInput
- * @param {*} name
- * @returns
- */
-function getName(name: string): Array<string> {
-    return getComponentNames(name);
 }
 
 interface CacheObj {
@@ -365,7 +347,7 @@ class FangComponent {
      * @returns { Boolean } 是否要替换
      */
     #namefilter(name: string): boolean {
-        name = getNmaeBar(name);
+        name = humpToLine(name);
         if (this.config.startss) {
             for (
                 let index = 0;
@@ -500,7 +482,7 @@ class FangComponent {
         name: string,
         type: ResolveType,
     ): FangComponentInfo {
-        let mb = getNmaeBar(name);
+        let mb = humpToLine(name);
         //匹配别名返回值
         const alias = this.config.alias;
         if (alias) {
@@ -570,7 +552,7 @@ class FangComponent {
         name: string,
         type: ResolveType,
     ): FangMatchs {
-        const arr = getName(name);
+        const arr = getComponentNames(name);
         const urls: FangMatchs = [];
         if (type == 'directive') {
             arr.forEach((v) => {
