@@ -13,7 +13,7 @@ npm i -D <b>@fangzhongya/vue-components</b>
 ### 单个配置
 
 ```js
-import { ComponentsResolver } from '@fangzhongya/vue-components';
+import { ComponentsResolver } from '@fangzhongya/vue-components/index';
 
 Components({
     resolvers: [ComponentsResolver()],
@@ -102,6 +102,11 @@ const config = {
      * 不区分首字母大小写
      */
     filtes: ['router-link', 'router-view'],
+
+    /**
+     * 控制台是否输出日志
+     */
+    log: true,
 
     /**
      * 匹配到的文件路径
@@ -198,7 +203,10 @@ interface Config {
      * 不区分首字母大小写
      */
     filtes?: Array<string>;
-
+    /**
+     * 控制台是否输出日志
+     */
+    log?: boolean;
     /**
      * 匹配到的文件路径
      */

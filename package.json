@@ -2,7 +2,7 @@
     "name": "@fangzhongya/vue-components",
     "private": false,
     "type": "module",
-    "version": "0.1.2-3",
+    "version": "0.1.2-7",
     "description ": "unplugin-vue-components插件",
     "author": "fangzhongya ",
     "license": "MIT",
@@ -25,7 +25,7 @@
     },
     "devDependencies": {
         "@fangzhongya/create": "0.2.0-6",
-        "@fangzhongya/utils": "0.0.6-11",
+        "@fangzhongya/utils": "0.0.7-2",
         "@types/node": "^18.11.19",
         "tsup": "^6.5.0",
         "typescript": "^4.9.5",
@@ -64,20 +64,10 @@
             "import": "./dist/component.js",
             "types": "./dist/component.d.ts"
         },
-        "./config": {
-            "require": "./dist/config.cjs",
-            "import": "./dist/config.js",
-            "types": "./dist/config.d.ts"
-        },
         ".": {
             "require": "./dist/index.cjs",
             "import": "./dist/index.js",
             "types": "./dist/index.d.ts"
-        },
-        "./util": {
-            "require": "./dist/util.cjs",
-            "import": "./dist/util.js",
-            "types": "./dist/util.d.ts"
         },
         "./index": {
             "require": "./dist/index.cjs",

@@ -2,7 +2,7 @@ lockfileVersion: 5.4
 
 specifiers:
   '@fangzhongya/create': 0.2.0-6
-  '@fangzhongya/utils': 0.0.6-11
+  '@fangzhongya/utils': 0.0.7-2
   '@types/node': ^18.11.19
   fast-glob: ^3.2.12
   tsup: ^6.5.0
@@ -15,7 +15,7 @@ dependencies:
 
 devDependencies:
   '@fangzhongya/create': 0.2.0-6
-  '@fangzhongya/utils': 0.0.6-11
+  '@fangzhongya/utils': 0.0.7-2
   '@types/node': 18.11.19
   tsup: 6.5.0_typescript@4.9.5
   typescript: 4.9.5
@@ -455,8 +455,8 @@ packages:
     resolution: {integrity: sha512-i/SRYJFcoRW0S3IEZ2Cpkw/yslOA0tsIGiI93/Z6Tpq4ukKeGTb3V43ZjGdHLyXUEjTo/nnhlHwUtebIJ5WJkg==}
     dev: true
 
-  /@fangzhongya/utils/0.0.6-11:
-    resolution: {integrity: sha512-f40I3n0bG44s8T+Ln7Veqq8sHQ9OncCd7JIsXSVEU/WW631048FU4r7VaB15FxHmSqm7wdA8NWxmH1GDZ30puA==}
+  /@fangzhongya/utils/0.0.7-2:
+    resolution: {integrity: sha512-a4Orz27lhU2ip28qgNcWGLlR+erVAElcbkuo0lBVWjtjysWpK62hc8qV2mGBBXiO4fiYSoLrNOpbQdbuxUXdIg==}
     dev: true
 
   /@jridgewell/gen-mapping/0.1.1:
@@ -730,7 +730,7 @@ packages:
     hasBin: true
     dependencies:
       caniuse-lite: 1.0.30001450
-      electron-to-chromium: 1.4.286
+      electron-to-chromium: 1.4.287
       node-releases: 2.0.10
       update-browserslist-db: 1.0.10_browserslist@4.21.5
     dev: true
@@ -923,8 +923,8 @@ packages:
     resolution: {integrity: sha512-I88TYZWc9XiYHRQ4/3c5rjjfgkjhLyW2luGIheGERbNQ6OY7yTybanSpDXZa8y7VUP9YmDcYa+eyq4ca7iLqWA==}
     dev: true
 
-  /electron-to-chromium/1.4.286:
-    resolution: {integrity: sha512-Vp3CVhmYpgf4iXNKAucoQUDcCrBQX3XLBtwgFqP9BUXuucgvAV9zWp1kYU7LL9j4++s9O+12cb3wMtN4SJy6UQ==}
+  /electron-to-chromium/1.4.287:
+    resolution: {integrity: sha512-Dj649q67z9oYp4dj7B80hdxb1ExIvy8KvrFqjCuGqFxUHk43b+VXQVFkD5zxAFmhvA6Mu9fou6ZQjJkMSXNFFg==}
     dev: true
 
   /emoji-regex/9.2.2:

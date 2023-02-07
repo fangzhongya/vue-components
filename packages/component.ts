@@ -723,7 +723,7 @@ class FangComponent {
                     text: 3,
                 }),
             );
-            if (obj) {
+            if (obj && obj.from) {
                 let sfrom = styleLog(obj?.from, {
                     text: 4,
                     revert: true,
@@ -750,12 +750,12 @@ class FangComponent {
                 arr.push(
                     styleLog(type, {
                         text: texts[type],
-                        lineThrough: true,
                     }),
                 );
                 arr.push(
                     styleLog(name, {
                         bold: true,
+                        text: 1,
                     }),
                 );
             }
@@ -778,8 +778,8 @@ class FangComponent {
             return cache;
         } else if (this.#namefilter(name)) {
             let obj = this.#setNameFrom(name, type);
+            this.#setLog(name, type, obj);
             if (obj) {
-                this.#setLog(name, type, obj);
                 this.#setCache(name, type, obj);
                 return obj;
             }
