@@ -1,18 +1,18 @@
 lockfileVersion: 5.4
 
 specifiers:
-  '@fangzhongya/create': 0.2.0-6
-  '@fangzhongya/utils': 0.0.7-2
-  '@types/node': ^18.11.19
+  '@fangzhongya/create': 0.2.0-13
+  '@fangzhongya/utils': 0.0.7-9
+  '@types/node': ^18.13.0
   fast-glob: ^3.2.12
-  tsup: ^6.5.0
+  tsup: ^6.6.0
   typescript: ^4.9.5
   unplugin-vue-components: ^0.23.0
   vitest: ^0.28.4
 
 devDependencies:
-  '@fangzhongya/create': 0.2.0-6
-  '@fangzhongya/utils': 0.0.7-2
+  '@fangzhongya/create': 0.2.0-13
+  '@fangzhongya/utils': 0.0.7-9
   '@types/node': 18.13.0
   fast-glob: 3.2.12
   tsup: 6.6.0_typescript@4.9.5
@@ -629,12 +629,12 @@ packages:
     dev: true
     optional: true
 
-  /@fangzhongya/create/0.2.0-6:
-    resolution: {integrity: sha512-i/SRYJFcoRW0S3IEZ2Cpkw/yslOA0tsIGiI93/Z6Tpq4ukKeGTb3V43ZjGdHLyXUEjTo/nnhlHwUtebIJ5WJkg==}
+  /@fangzhongya/create/0.2.0-13:
+    resolution: {integrity: sha512-CVzKcE+Ms3xPLaeBfBeM1Pz/Q5YE+uNDUOclTZYzQ5IWLe1LonDkghHenliw6zqJBcuvrr9sZxVVOD6epiW6lA==}
     dev: true
 
-  /@fangzhongya/utils/0.0.7-2:
-    resolution: {integrity: sha512-a4Orz27lhU2ip28qgNcWGLlR+erVAElcbkuo0lBVWjtjysWpK62hc8qV2mGBBXiO4fiYSoLrNOpbQdbuxUXdIg==}
+  /@fangzhongya/utils/0.0.7-9:
+    resolution: {integrity: sha512-+WZ+/xdJcxtBfW8zH/kAgJ8VPCWFGug5134IjPsIl9fOlSJiaZ7pHabtXKB40UD1tIcqVa+gEgDxnHxSTS+1Kg==}
     dev: true
 
   /@jridgewell/gen-mapping/0.1.1:
@@ -911,8 +911,8 @@ packages:
     engines: {node: ^6 || ^7 || ^8 || ^9 || ^10 || ^11 || ^12 || >=13.7}
     hasBin: true
     dependencies:
-      caniuse-lite: 1.0.30001450
-      electron-to-chromium: 1.4.288
+      caniuse-lite: 1.0.30001451
+      electron-to-chromium: 1.4.289
       node-releases: 2.0.10
       update-browserslist-db: 1.0.10_browserslist@4.21.5
     dev: true
@@ -951,8 +951,8 @@ packages:
     engines: {node: '>=8'}
     dev: true
 
-  /caniuse-lite/1.0.30001450:
-    resolution: {integrity: sha512-qMBmvmQmFXaSxexkjjfMvD5rnDL0+m+dUMZKoDYsGG8iZN29RuYh9eRoMvKsT6uMAWlyUUGDEQGJJYjzCIO9ew==}
+  /caniuse-lite/1.0.30001451:
+    resolution: {integrity: sha512-XY7UbUpGRatZzoRft//5xOa69/1iGJRBlrieH6QYrkKLIFn3m7OVEJ81dSrKoy2BnKsdbX5cLrOispZNYo9v2w==}
     dev: true
 
   /chai/4.3.7:
@@ -1105,8 +1105,8 @@ packages:
     resolution: {integrity: sha512-I88TYZWc9XiYHRQ4/3c5rjjfgkjhLyW2luGIheGERbNQ6OY7yTybanSpDXZa8y7VUP9YmDcYa+eyq4ca7iLqWA==}
     dev: true
 
-  /electron-to-chromium/1.4.288:
-    resolution: {integrity: sha512-8s9aJf3YiokIrR+HOQzNOGmEHFXVUQzXM/JaViVvKdCkNUjS+lEa/uT7xw3nDVG/IgfxiIwUGkwJ6AR1pTpYsQ==}
+  /electron-to-chromium/1.4.289:
+    resolution: {integrity: sha512-relLdMfPBxqGCxy7Gyfm1HcbRPcFUJdlgnCPVgQ23sr1TvUrRJz0/QPoGP0+x41wOVSTN/Wi3w6YDgHiHJGOzg==}
     dev: true
 
   /emoji-regex/9.2.2:
