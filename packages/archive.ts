@@ -51,6 +51,8 @@ function setJson(obj: FangConfig) {
                 url,
                 JSON.stringify(
                     global._ComponentsResolverArchive_,
+                    null,
+                    4,
                 ),
                 'utf-8',
                 () => {},
